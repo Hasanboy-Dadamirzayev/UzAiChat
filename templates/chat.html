@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UzAI Chat</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="chatbot-container">
+        <header class="chatbot-header">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>UzAI Asistant Chat</h1>
+            </div>
+            <p class="subtitle">Created by Code By Hasan</p>
+        </header>
+
+        <main class="chatbot-main">
+            <form method="post" class="chatbot-form">
+                {% csrf_token %}
+                <div class="input-group">
+                    <textarea name="prompt" rows="4" placeholder="Savolingizni yozing..." class="chatbot-input"></textarea>
+                    <button type="submit" class="chatbot-submit">
+                        <i class="fas fa-paper-plane"></i> Yuborish
+                    </button>
+                </div>
+            </form>
+
+            <div class="chatbot-response">
+                {% if response %}
+                    <div class="response-header">
+                        <i class="fas fa-comment-dots"></i>
+                        <h3>Javob:</h3>
+                    </div>
+                    <div class="response-content">
+                        <p>{{ response }}</p>
+                    </div>
+                {% elif error %}
+                    <div class="error-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Xatolik:</h3>
+                    </div>
+                    <div class="error-content">
+                        <p>{{ error }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        </main>
+
+        <footer class="chatbot-footer">
+            <p>Created by Code By Hasan</p>
+        </footer>
+    </div>
+</body>
+</html>
